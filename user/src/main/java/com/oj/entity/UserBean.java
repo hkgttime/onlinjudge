@@ -2,7 +2,7 @@ package com.oj.entity;
 
 import java.util.Date;
 
-public class userBean {
+public class UserBean {
     private long uid;
     private String name;
     private String password;
@@ -14,9 +14,9 @@ public class userBean {
     private int status;
     private Date creatDate;
 
-    public userBean(){}
+    public UserBean(){}
 
-    public userBean(long uid, String name, String password, String email, String phone, String motto, int commitTotal, int acceptedTotal, int status, Date creatDate) {
+    public UserBean(long uid, String name, String password, String email, String phone, String motto, int commitTotal, int acceptedTotal, int status, Date creatDate) {
         this.uid = uid;
         this.name = name;
         this.password = password;

@@ -1,9 +1,8 @@
 package com.oj.conf;
 
-
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class baseConf {
-
+public class UserConf {
+    
 }
