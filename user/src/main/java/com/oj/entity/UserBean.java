@@ -3,6 +3,7 @@ package com.oj.entity;
 import java.util.Date;
 
 public class UserBean {
+
     private long uid;
     private String name;
     private String password;

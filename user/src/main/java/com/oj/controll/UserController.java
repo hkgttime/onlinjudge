@@ -1,34 +1,45 @@
 package com.oj.controll;
 
-import com.oj.api.UserApi;
+import com.oj.api.RouteApi;
+import com.oj.entity.Restful;
 import com.oj.entity.UserBean;
-import org.springframework.stereotype.Controller;
+import com.oj.serve.UserServe;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller("userController")
-public class UserController implements UserApi {
+@RestController
+@RequestMapping("/user/*")
+public class UserController implements RouteApi {
+
+    @Autowired
+    private UserServe userServe;
+
     @Override
-    public int creatUser(UserBean userBean) {
-        return 0;
+    @RequestMapping("create")
+    public Restful createUser(UserBean userBean) {
+        userServe.createUserServe(userBean);
+        return null;
     }
 
     @Override
-    public int delUser(long uid, String name) {
-        return 0;
+    public Restful delUser(long uid, String name) {
+        return null;
     }
 
     @Override
-    public UserBean login(String email, String password) {
+    public Restful login(String email, String password) {
 
         return null;
     }
 
     @Override
-    public int logout(UserBean userBean) {
-        return 0;
+    public Restful logout(UserBean userBean) {
+        return null;
     }
 
     @Override
-    public UserBean update(UserBean userBean) {
+    public Restful update(UserBean userBean) {
         return null;
     }
 }

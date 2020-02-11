@@ -6,27 +6,32 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="user" />
-        <module name="common" />
-        <module name="web" />
-        <module name="problem" />
         <module name="redis" />
+        <module name="common" />
         <module name="execute" />
+        <module name="user" />
+        <module name="problem" />
+        <module name="app" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="mysql" target="1.8" />
+      <module name="app" target="1.8" />
+      <module name="common" target="1.8" />
+      <module name="execute" target="1.8" />
+      <module name="onlinejudge" target="1.8" />
+      <module name="problem" target="1.8" />
+      <module name="redis" target="1.8" />
+      <module name="user" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="app" options="-parameters" />
       <module name="common" options="-parameters" />
       <module name="execute" options="-parameters" />
-      <module name="mysql" options="-parameters" />
       <module name="problem" options="-parameters" />
       <module name="redis" options="-parameters" />
       <module name="user" options="-parameters" />
-      <module name="web" options="-parameters" />
     </option>
   </component>
 </project>
