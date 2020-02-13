@@ -2,7 +2,7 @@ package com.oj.entity;
 
 import java.util.Date;
 
-public class UserBean {
+public class UserBean{
 
     private long uid;
     private String name;
@@ -70,6 +70,7 @@ public class UserBean {
         return creatDate;
     }
 
+
     public void setUid(long uid) {
         this.uid = uid;
     }
@@ -109,4 +110,5 @@ public class UserBean {
     public void setCreatDate(Date creatDate) {
         this.creatDate = creatDate;
     }
+
 }

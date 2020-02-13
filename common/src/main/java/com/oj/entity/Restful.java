@@ -5,6 +5,8 @@ public class Restful {
     public String msg;
     public Object data;
 
+    public Restful(){}
+
     public Restful(int responseCode, String msg, Object data) {
         this.responseCode = responseCode;
         this.msg = msg;
