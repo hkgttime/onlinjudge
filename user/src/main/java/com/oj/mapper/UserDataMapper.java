@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserDataMapper {
 
-    @Insert("INSERT INTO USERS (uname, password, email, creatDate) VALUES (#{uid}, #{password}, #{email}, #{creatDate})")
+    @Insert("INSERT INTO USERS (uname, password, email, creatDate) VALUES (#{name}, #{password}, #{email}, #{creatDate})")
     public int insertUser(UserBean userBean);
 }

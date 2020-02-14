@@ -4,6 +4,8 @@ import com.oj.api.UserServeApi;
 import com.oj.entity.RestfulCode;
 import com.oj.entity.UserBean;
 import com.oj.mapper.UserDataMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -25,14 +27,16 @@ public class UserServe implements UserServeApi {
     private RedisTemplate<String, String> redisTemplate;
     @Autowired
     private JavaMailSenderImpl mailSender;
+    private Logger logger = LoggerFactory.getLogger(getClass());
 
 
     @Override
     public int createUserServe(String email, String verificationCode) {
         HashOperations<String,String,Object> opsForHash = redisTemplate.opsForHash();
-        long time = (Long) opsForHash.get(email, "time");
+        String time = (String) opsForHash.get(email, "email");
+        logger.trace(time);
         long now = (new Date().getTime() / 1000);
-        if (time > now){
+        if (time != null){
             String code = (String) opsForHash.get(email,"code");
             if (code.equals(verificationCode)){
                 String name = (String) opsForHash.get(email, "name");
@@ -41,7 +45,9 @@ public class UserServe implements UserServeApi {
                 user.setName(name);
                 user.setPassword(password);
                 user.setEmail(email);
+                user.setCreatDate(new Date());
                 int id = userDataMapper.insertUser(user);
+                redisTemplate.delete(email);
                 return id;
             }
         }
@@ -72,27 +78,32 @@ public class UserServe implements UserServeApi {
     public void sendActivationUserMail(UserBean user){
         HashOperations<String,String,Object> opsForHash = redisTemplate.opsForHash();
         MimeMessage message = mailSender.createMimeMessage();
-        MimeMessageHelper messageHelper = new MimeMessageHelper(message);
         String email = user.getEmail();
-        String verificationCode = getVerificationCode();
+        String verificationCode = getVerificationCode(5);
         try {
+            MimeMessageHelper messageHelper = new MimeMessageHelper(message,true);
             messageHelper.setSubject("[OnlineJudge] Please activation your account");
-            messageHelper.setText("<a>localhost:8080/user/creat?email="+email+"&vc="+verificationCode+"<a>", "html");
-            messageHelper.setTo(user.getEmail());
+            messageHelper.setText("<a>localhost:8080/user/creat?email="+email+"&vc="+verificationCode+"<a>", true);
+            messageHelper.setTo(email);
+            messageHelper.setFrom("1320643835@qq.com");
+            mailSender.send(message);
         } catch (MessagingException e) {
             e.printStackTrace();
+            logger.error("mail send err", e);
         }
         long time = (new Date().getTime() / 1000) + 300000;
+        String aftime = String.valueOf(time);
         opsForHash.put(email,"name", user.getName());
         opsForHash.put(email,"password", user.getPassword());
+        opsForHash.put(email, "email", user.getEmail());
         opsForHash.put(email, "code", verificationCode);
-        opsForHash.put(email, "time", time);
+        opsForHash.put(email, "time", aftime);
     }
 
-    public String getVerificationCode(){
+    public String getVerificationCode(int len){
         String verificationCode = new String();
         String str="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        for(int i=0; i<4; i++)
+        for(int i=0; i<len; i++)
         {
             char ch=str.charAt(new Random().nextInt(str.length()));
             verificationCode += ch;
