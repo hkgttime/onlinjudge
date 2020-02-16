@@ -1,12 +1,15 @@
 package com.oj.api;
 
 import com.oj.entity.UserBean;
+import io.jsonwebtoken.Claims;
+
+import java.util.Map;
 
 public interface UserServeApi {
-    int createUserServe(String email, String verificationCode);
-    int delUserServe(long uid, String name);
-    UserBean loginServe(String name, String password);
-    int logoutServe(UserBean userBean);
-    UserBean updateServe(UserBean userBean);
-    void sendActivationUserMail(UserBean user);
+    int createUserServe(Claims claims);
+    int delUserServe();
+    Map<String, Object> loginServe(String email, String password);
+    int logoutServe();
+    UserBean updateServe(String newpassword);
+    int sendActivateEmail(UserBean user);
 }

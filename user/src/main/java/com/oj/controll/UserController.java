@@ -5,11 +5,11 @@ import com.oj.entity.Restful;
 import com.oj.entity.RestfulCode;
 import com.oj.entity.UserBean;
 import com.oj.serve.UserServe;
+import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 
 @RestController
@@ -20,10 +20,11 @@ public class UserController implements UserRouteApi {
     private UserServe userServe;
 
     @Override
-    @PostMapping("create")
-    public Restful createUser(String email, String verificationCode) {
+    @PostMapping("activate")
+    public Restful activateAccount(HttpServletRequest request) {
         Restful restfulUser = new Restful();
-        int res = userServe.createUserServe(email, verificationCode);
+        Claims claims = (Claims) request.getAttribute("claims");
+        int res = userServe.createUserServe(claims);
         restfulUser.setResponseCode(RestfulCode.OJ_OK);
         restfulUser.setMsg("request successfully");
         restfulUser.setData(res);
@@ -32,38 +33,47 @@ public class UserController implements UserRouteApi {
 
     @Override
     @GetMapping("delete")
-    public Restful delUser(long uid, String name) {
+    public Restful delUser(String uid, String name) {
 
         return null;
     }
 
     @Override
+    @RequestMapping("login")
     public Restful login(String email, String password) {
 
         return null;
     }
 
     @Override
-    public Restful logout(UserBean userBean) {
+    public Restful logout(@RequestHeader("Authorization") String token) {
         return null;
     }
 
     @Override
-    public Restful update(UserBean userBean) {
+    public Restful update(String newpassword) {
         return null;
     }
 
     @Override
-    @PostMapping("mail")
-    public Restful getMail(String name, String password, String email) {
-        UserBean userBean = new UserBean();
+    @PostMapping("create")
+    public Restful createAccount(UserBean user) {
         Restful restfulUser = new Restful();
-        userBean.setEmail(email);
-        userBean.setName(name);
-        userBean.setPassword(password);
-        userServe.sendActivationUserMail(userBean);
+        System.out.println(user.getName());
+        int ret = userServe.sendActivateEmail(user);
+        if (ret == 0){
+            restfulUser.setResponseCode(RestfulCode.OJ_FAIL);
+            restfulUser.setMsg("serve error");
+        }
         restfulUser.setResponseCode(RestfulCode.OJ_OK);
         restfulUser.setMsg("request successfully");
         return restfulUser;
+    }
+
+    @Override
+    @RequestMapping("profile/{name}")
+    public Restful getProfile(@PathVariable("name") String name) {
+
+        return null;
     }
 }

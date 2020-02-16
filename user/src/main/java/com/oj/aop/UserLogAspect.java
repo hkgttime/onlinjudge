@@ -21,5 +21,4 @@ public class UserLogAspect {
     public void logs(JoinPoint joinPoint){
         logger.debug(joinPoint.getSignature().getName());
     }
-
 }

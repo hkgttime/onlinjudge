@@ -38,4 +38,7 @@ spring:
 logging:
     level:
       root: info
-
+jwt:
+  conf:
+    key: 123
+    ttlMillis: 3600

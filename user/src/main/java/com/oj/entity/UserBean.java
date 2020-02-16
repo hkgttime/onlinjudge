@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class UserBean{
 
-    private long uid;
+    private String uuid;
     private String name;
     private String password;
     private String email;
@@ -15,24 +15,12 @@ public class UserBean{
     private int status;
     private Date creatDate;
 
+    public String getUuid() {
+        return uuid;
+    }
+
     public UserBean(){}
 
-    public UserBean(long uid, String name, String password, String email, String phone, String motto, int commitTotal, int acceptedTotal, int status, Date creatDate) {
-        this.uid = uid;
-        this.name = name;
-        this.password = password;
-        this.email = email;
-        this.phone = phone;
-        this.motto = motto;
-        this.commitTotal = commitTotal;
-        this.acceptedTotal = acceptedTotal;
-        this.status = status;
-        this.creatDate = creatDate;
-    }
-
-    public long getUid() {
-        return uid;
-    }
 
     public String getName() {
         return name;
@@ -70,9 +58,8 @@ public class UserBean{
         return creatDate;
     }
 
-
-    public void setUid(long uid) {
-        this.uid = uid;
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     public void setName(String name) {

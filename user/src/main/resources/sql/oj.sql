@@ -1,8 +1,8 @@
 CREATE DATABASE onlinejudge;
 USE onlinejudge;
 CREATE TABLE USERS(
-      uid INT AUTO_INCREMENT,
-      uname VARCHAR(10) NOT NULL,
+      uuid VARCHAR(32),
+      name VARCHAR(10) NOT NULL,
       password VARCHAR(16) NOT NULL,
       email VARCHAR(16) NOT NULL,
       phone VARCHAR(11),
@@ -11,11 +11,11 @@ CREATE TABLE USERS(
       acceptedTotal INT,
       status INT(1),
       creatDate DATE NOT NULL,
-      PRIMARY KEY(uid)
+      PRIMARY KEY(uuid)
 );
 
 CREATE TABLE PROBLEMS(
-    pid INT AUTO_INCREMENT,
+    pid VARCHAR(32),
     title VARCHAR(32),
     description VARCHAR(1000),
     inputFormat VARCHAR(1000),
@@ -23,19 +23,19 @@ CREATE TABLE PROBLEMS(
     hint VARCHAR(1000),
     sampleTestcases VARCHAR(1000),
     status INT(1),
-    provider INT NOT NULL,
+    provider VARCHAR(32) NOT NULL,
     PRIMARY KEY(pid),
-    FOREIGN KEY (provider) REFERENCES USERS(uid)
+    FOREIGN KEY (provider) REFERENCES USERS(uuid)
 );
 
 CREATE TABLE OUTINTEMS(
-     cid INT AUTO_INCREMENT PRIMARY KEY,
-     problemId INT NOT NULL,
-     userId INT NOT NULL,
+     cid VARCHAR(32) NOT NULL,
+     problemId VARCHAR(32) NOT NULL,
+     userId VARCHAR(32) NOT NULL,
      temName VARCHAR(10) NOT NULL,
      temPath VARCHAR(20) NOT NULL,
      creatDate DATE NOT NULL,
-     FOREIGN KEY (userId) REFERENCES USERS(uid),
+     FOREIGN KEY (userId) REFERENCES USERS(uuid),
      FOREIGN KEY (problemId) REFERENCES PROBLEMS(pid)
 );
 

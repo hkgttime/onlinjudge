@@ -7,7 +7,6 @@
       <module fileurl="file://$PROJECT_DIR$/execute/execute.iml" filepath="$PROJECT_DIR$/execute/execute.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/onlinejudge.iml" filepath="$PROJECT_DIR$/.idea/onlinejudge.iml" />
       <module fileurl="file://$PROJECT_DIR$/problem/problem.iml" filepath="$PROJECT_DIR$/problem/problem.iml" />
-      <module fileurl="file://$PROJECT_DIR$/redis/redis.iml" filepath="$PROJECT_DIR$/redis/redis.iml" />
       <module fileurl="file://$PROJECT_DIR$/user/user.iml" filepath="$PROJECT_DIR$/user/user.iml" />
     </modules>
   </component>
