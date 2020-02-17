@@ -1,5 +1,6 @@
 package com.oj.conf;
 
+import com.oj.Interceptor.JwtVerifyInt;
 import com.oj.Interceptor.UserDataFormatCheckInt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -14,13 +15,19 @@ public class UserWebMvcConf implements WebMvcConfigurer {
 
     @Autowired
     private UserDataFormatCheckInt userDataVerification;
+    @Autowired
+    private JwtVerifyInt jwtVerifyInt;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-      //  registry.addInterceptor(interceptor).addPathPatterns("/user/*");
-        List<String> list = new ArrayList<String>();
-        list.add("user/login");
-        list.add("user/mail");
-        //registry.addInterceptor(userDataVerification).addPathPatterns(list);
+        List excludePath = new ArrayList();
+        excludePath.add("login");
+        excludePath.add("create");
+        excludePath.add("profile/*");
+       registry.addInterceptor(jwtVerifyInt).addPathPatterns("/user/*")
+               .excludePathPatterns(excludePath);
+       registry.addInterceptor(userDataVerification).addPathPatterns("/user/login")
+               .addPathPatterns("/user/create");
+
     }
 }

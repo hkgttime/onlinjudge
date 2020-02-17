@@ -14,7 +14,7 @@ public class UserLogAspect {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
-    @Pointcut("execution(public * com.oj.controll.UserController.delUser(..))")
+    @Pointcut("execution(public * com.oj.controll.UserBaseController.delUser(..))")
     public void userLog(){}
 
     @Before("userLog()")

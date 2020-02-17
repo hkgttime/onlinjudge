@@ -1,36 +1,27 @@
 package com.oj.entity;
 
 public class Restful {
-    public int responseCode;
-    public String msg;
+    public ReslutCode reslutCode;
     public Object data;
 
-    public Restful(){}
+    public Restful() {
+    }
 
-    public Restful(int responseCode, String msg, Object data) {
-        this.responseCode = responseCode;
-        this.msg = msg;
+    public Restful(ReslutCode reslutCode, Object data) {
+        this.reslutCode = reslutCode;
         this.data = data;
     }
 
-    public int getResponseCode() {
-        return responseCode;
-    }
-
-    public String getMsg() {
-        return msg;
+    public ReslutCode getReslutCode() {
+        return reslutCode;
     }
 
     public Object getData() {
         return data;
     }
 
-    public void setResponseCode(int responseCode) {
-        this.responseCode = responseCode;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public void setReslutCode(ReslutCode reslutCode) {
+        this.reslutCode = reslutCode;
     }
 
     public void setData(Object data) {

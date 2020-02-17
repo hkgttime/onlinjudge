@@ -13,10 +13,19 @@ public class UserBean{
     private int commitTotal;
     private int acceptedTotal;
     private int status;
+    private int score;
     private Date creatDate;
 
     public String getUuid() {
         return uuid;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 
     public UserBean(){}

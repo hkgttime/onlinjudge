@@ -1,6 +1,6 @@
-package com.oj.serve;
+package com.oj.service;
 
-import com.oj.api.UserServeApi;
+import com.oj.api.UserServiceApi;
 import com.oj.entity.UserBean;
 import com.oj.mapper.UserDataMapper;
 import com.oj.utils.JwtUtils;
@@ -21,7 +21,7 @@ import java.util.Map;
 import java.util.UUID;
 
 @Service
-public class UserServe implements UserServeApi {
+public class UserService implements UserServiceApi {
 
     @Autowired
     private UserDataMapper userDataMapper;
@@ -43,19 +43,23 @@ public class UserServe implements UserServeApi {
         user.setEmail((String) claims.get("email"));
         user.setPassword((String) claims.get("password"));
         user.setStatus(1);
-        userDataMapper.insertUser(user);
+        String uuid = userDataMapper.insertUser(user);
+        if (uuid == null) {
+            return 0;
+        }
         return 1;
     }
 
     @Override
-    public int delUserServe() {
-
-        return 0;
+    public int delUserServe(Claims claims) {
+        String uuid = (String) claims.get("uuid");
+        int ret = userDataMapper.delUser(uuid);
+        return ret;
     }
 
     @Override
     public Map<String, Object> loginServe(String email, String password) {
-        UserBean user = userDataMapper.selectUser(email, password);
+        UserBean user = userDataMapper.findUser(email, password);
         if (user == null){
             return null;
         }
@@ -83,12 +87,17 @@ public class UserServe implements UserServeApi {
     @Override
     public int sendActivateEmail(UserBean user){
 
+        int i = userDataMapper.findEmail(user.getEmail());
+        if (i > 0){
+            return 0;
+        }
         Map<String, Object> map = new HashMap<>();
         map.put("name", user.getName());
         map.put("email", user.getEmail());
         map.put("password", user.getPassword());
         jwt.setttlMillis(300000);
         String token = jwt.createJWT("0000","activation",map);
+        String mail = "";
         MimeMessage message = mailSender.createMimeMessage();
         try {
             MimeMessageHelper messageHelper = new MimeMessageHelper(message,true);

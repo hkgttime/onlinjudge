@@ -4,12 +4,14 @@ import com.oj.exception.ParamIllegal;
 import com.oj.utils.JwtUtils;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class JwtVerify implements HandlerInterceptor {
+@Component
+public class JwtVerifyInt implements HandlerInterceptor {
 
     @Autowired
     private JwtUtils jwt;

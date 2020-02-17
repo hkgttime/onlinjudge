@@ -10,6 +10,7 @@ CREATE TABLE USERS(
       commitTotal INT,
       acceptedTotal INT,
       status INT(1),
+      score LONG NOT NULL,
       creatDate DATE NOT NULL,
       PRIMARY KEY(uuid)
 );
@@ -23,6 +24,7 @@ CREATE TABLE PROBLEMS(
     hint VARCHAR(1000),
     sampleTestcases VARCHAR(1000),
     status INT(1),
+    score LONG NOT NULL,
     provider VARCHAR(32) NOT NULL,
     PRIMARY KEY(pid),
     FOREIGN KEY (provider) REFERENCES USERS(uuid)
