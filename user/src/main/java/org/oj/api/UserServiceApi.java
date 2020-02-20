@@ -3,10 +3,12 @@ package org.oj.api;
 import org.oj.entity.UserBean;
 import io.jsonwebtoken.Claims;
 
+import javax.mail.MessagingException;
 import java.util.ArrayList;
 import java.util.Map;
 
 public interface UserServiceApi {
+
     default int createUserServe(Claims claims) {
         return 0;
     }
@@ -27,7 +29,7 @@ public interface UserServiceApi {
         return null;
     }
 
-    default int sendActivateEmail(UserBean user) {
+    default int sendActivateEmail(UserBean user) throws MessagingException {
         return 0;
     }
 
@@ -39,7 +41,8 @@ public interface UserServiceApi {
         return null;
     }
 
-    default UserBean findUserById(String uuid){
+    default UserBean getUser(String uuid){
         return null;
     }
+
 }

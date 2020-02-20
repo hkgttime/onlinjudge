@@ -8,6 +8,7 @@ import io.jsonwebtoken.Claims;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -32,6 +33,8 @@ public class UserService implements UserServiceApi {
     private Logger logger = LoggerFactory.getLogger(getClass());
     @Autowired
     private JwtUtils jwt;
+    @Value("spring.mail.username")
+    private String fromAddr;
 
 
     @Override
@@ -85,7 +88,7 @@ public class UserService implements UserServiceApi {
     }
 
     @Override
-    public int sendActivateEmail(UserBean user){
+    public int sendActivateEmail(UserBean user) throws MessagingException {
 
         int i = userDataMapper.findEmail(user.getEmail());
         if (i > 0){
@@ -99,21 +102,16 @@ public class UserService implements UserServiceApi {
         String token = jwt.createJWT("0000","activation",map);
         String mail = "";
         MimeMessage message = mailSender.createMimeMessage();
-        try {
-            MimeMessageHelper messageHelper = new MimeMessageHelper(message,true);
-            messageHelper.setSubject("[OnlineJudge] Please activation your account");
-            messageHelper.setText("<a>localhost:8080<a>", true);
-            messageHelper.setTo(user.getEmail());
-            messageHelper.setFrom("1320643835@qq.com");
-        } catch (MessagingException e) {
-            logger.error(e.toString());
-            return 0;
-        }
+        MimeMessageHelper messageHelper = new MimeMessageHelper(message,true);
+        messageHelper.setSubject("[OnlineJudge] Please activation your account");
+        messageHelper.setText("<a>localhost:8080<a>", true);
+        messageHelper.setTo(user.getEmail());
+        messageHelper.setFrom(fromAddr);
         mailSender.send(message);
         return 1;
     }
 
-    public UserBean findUserById(String uuid){
+    public UserBean getUser(String uuid){
         UserBean user = userDataMapper.findUserById(uuid);
         return user;
     }

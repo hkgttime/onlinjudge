@@ -1,14 +1,12 @@
 package org.oj.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.oj.api.UserServiceApi;
 import org.oj.entity.UserBean;
 import org.oj.mapper.UserDataMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.ListOperations;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -24,26 +22,12 @@ public class RankService implements UserServiceApi {
     private Logger logger = LoggerFactory.getLogger(getClass());
 
 
+    @Cacheable(cacheNames = "ranklist", keyGenerator = "pageKeyGenerate", condition = "#page < 20")
     public ArrayList<UserBean> getList(int page){
         ArrayList<UserBean> list = new ArrayList<>();
         int start = page * 20;
         list = (ArrayList<UserBean>) userDataMapper.findByPage(start);
         return list;
-    }
-
-    public ArrayList<UserBean> getTwentyPages(int page){
-        ArrayList<UserBean> ls = (ArrayList<UserBean>) userDataMapper.twentyPages();
-        for ( UserBean user : ls ) {
-            ObjectMapper mapper = new ObjectMapper();
-            ListOperations opsForList = redisTemplate.opsForList();
-            try {
-                String json = mapper.writeValueAsString(user);
-                opsForList.leftPush("z2tpages",json);
-            } catch (JsonProcessingException e) {
-                logger.error(e.toString());
-            }
-        }
-        return ls;
     }
 
 }

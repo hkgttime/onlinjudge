@@ -3,6 +3,7 @@ package org.oj.api;
 import org.oj.entity.Restful;
 import org.oj.entity.UserBean;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 
 public interface UserControllerApi {
@@ -27,7 +28,7 @@ public interface UserControllerApi {
         return null;
     }
 
-    default Restful createAccount(UserBean user) {
+    default Restful createAccount(UserBean user) throws MessagingException {
         return null;
     }
 

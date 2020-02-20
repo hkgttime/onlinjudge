@@ -1,8 +1,9 @@
 package org.oj.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class UserBean{
+public class UserBean implements Serializable {
 
     private String uuid;
     private String name;

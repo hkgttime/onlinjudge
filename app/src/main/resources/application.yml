@@ -37,7 +37,8 @@ spring:
 # log
 logging:
     level:
-      root: info
+      org.oj.mapper: debug
+
 jwt:
   conf:
     key: 123
