@@ -1,12 +1,11 @@
 package org.oj.mapper;
 
-import org.oj.entity.UserBean;
 import org.apache.ibatis.annotations.*;
-import org.springframework.stereotype.Repository;
+import org.oj.entity.UserBean;
 
 import java.util.List;
 
-@Repository
+@Mapper
 public interface UserDataMapper {
 
     @Insert("INSERT INTO USERS (uuid, name, password, email, creatDate, status) VALUES (#{uuid}, #{name}, #{password}, #{email}, #{creatDate}, #{status})")

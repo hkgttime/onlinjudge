@@ -17,17 +17,17 @@ public class ProblemManageController implements ProblemManageApi {
     }
 
     @Override
-    public Restful delCaseFile(CaseFile file) {
+    public Restful delCaseFile(String cid) {
         return null;
     }
 
     @Override
-    public Restful delProblem(Problem problem) {
+    public Restful delProblem(String pid) {
         return null;
     }
 
     @Override
-    public Restful updateProblem() {
+    public Restful updateProblem(Problem problem) {
         return null;
     }
 }

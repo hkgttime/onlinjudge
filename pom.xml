@@ -15,6 +15,7 @@
         <module>execute</module>
         <module>problem</module>
         <module>app</module>
+        <module>admin</module>
     </modules>
 
     <parent>
