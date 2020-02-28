@@ -3,19 +3,21 @@ package org.oj.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-public class UserBean implements Serializable {
+public class UserBase implements Serializable {
 
     private String uuid;
     private String name;
     private String password;
     private String email;
-    private String phone;
     private String motto;
     private int commitTotal;
     private int acceptedTotal;
     private int status;
     private int score;
+    private String avatar;
     private Date creatDate;
+
+    public UserBase(){}
 
     public String getUuid() {
         return uuid;
@@ -29,8 +31,13 @@ public class UserBean implements Serializable {
         this.score = score;
     }
 
-    public UserBean(){}
+    public String getAvatar() {
+        return avatar;
+    }
 
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
 
     public String getName() {
         return name;
@@ -44,9 +51,6 @@ public class UserBean implements Serializable {
         return email;
     }
 
-    public String getPhone() {
-        return phone;
-    }
 
     public String getMotto() {
         return motto;
@@ -84,9 +88,6 @@ public class UserBean implements Serializable {
         this.email = email;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
 
     public void setMotto(String motto) {
         this.motto = motto;

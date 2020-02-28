@@ -1,7 +1,7 @@
 package org.oj.service;
 
 import org.oj.api.UserServiceApi;
-import org.oj.entity.UserBean;
+import org.oj.entity.UserBase;
 import org.oj.mapper.UserDataMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,10 +23,10 @@ public class RankService implements UserServiceApi {
 
 
     @Cacheable(cacheNames = "ranklist", keyGenerator = "pageKeyGenerate", condition = "#page < 20")
-    public ArrayList<UserBean> getList(int page){
-        ArrayList<UserBean> list = new ArrayList<>();
+    public ArrayList<UserBase> getList(int page){
+        ArrayList<UserBase> list = new ArrayList<>();
         int start = page * 20;
-        list = (ArrayList<UserBean>) userDataMapper.findByPage(start);
+        list = (ArrayList<UserBase>) userDataMapper.findByPage(start);
         return list;
     }
 

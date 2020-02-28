@@ -1,7 +1,7 @@
 package org.oj.api;
 
-import org.oj.entity.UserBean;
 import io.jsonwebtoken.Claims;
+import org.oj.entity.UserBase;
 
 import javax.mail.MessagingException;
 import java.util.ArrayList;
@@ -21,27 +21,24 @@ public interface UserServiceApi {
         return null;
     }
 
-    default int logoutServe() {
+
+    default UserBase updateServe(String newpassword) {
+        return null;
+    }
+
+    default int sendVCtoEmail(String email) throws MessagingException {
         return 0;
     }
 
-    default UserBean updateServe(String newpassword) {
+    default ArrayList<UserBase> getList(int page) {
         return null;
     }
 
-    default int sendActivateEmail(UserBean user) throws MessagingException {
-        return 0;
-    }
-
-    default ArrayList<UserBean> getList(int page) {
+    default ArrayList<UserBase> getTwentyPages(int page){
         return null;
     }
 
-    default ArrayList<UserBean> getTwentyPages(int page){
-        return null;
-    }
-
-    default UserBean getUser(String uuid){
+    default UserBase getUser(String uuid){
         return null;
     }
 

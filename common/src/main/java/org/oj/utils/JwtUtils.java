@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 import java.util.Map;
 
-@ConfigurationProperties(prefix = "jwt.conf")
+@ConfigurationProperties( prefix = "jwt.conf")
 @Component
 public class JwtUtils {
 

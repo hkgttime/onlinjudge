@@ -19,7 +19,7 @@ public class JwtVerifyInt implements HandlerInterceptor {
             throws Exception {
         String authorization = request.getHeader("Authorization");
         if (!authorization.isEmpty() && authorization.startsWith("Bearer") ){
-            String token = authorization.replace("Bearer", "");
+            String token = authorization.replace("Bearer-", "");
             Claims claims = jwt.parseJWT(token);
             request.setAttribute("claims", claims);
             return true;

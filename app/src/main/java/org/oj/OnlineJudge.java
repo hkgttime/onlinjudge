@@ -1,4 +1,4 @@
-package com;
+package org.oj;
 
 
 import org.mybatis.spring.annotation.MapperScan;

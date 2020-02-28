@@ -1,7 +1,7 @@
 package org.oj.api;
 
 import org.oj.entity.Restful;
-import org.oj.entity.UserBean;
+import org.oj.entity.UserBase;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
@@ -20,19 +20,16 @@ public interface UserControllerApi {
         return null;
     }
 
-    default Restful logout(String token) {
+
+    default Restful update(UserBase user) {
         return null;
     }
 
-    default Restful update(String newpassword) {
+    default Restful sendVC(String email) throws MessagingException {
         return null;
     }
 
-    default Restful createAccount(UserBean user) throws MessagingException {
-        return null;
-    }
-
-    default Restful getProfile(String name, String authorization) {
+    default Restful getProfile(String name) {
         return null;
     }
 

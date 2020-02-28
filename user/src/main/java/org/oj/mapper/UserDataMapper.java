@@ -1,7 +1,7 @@
 package org.oj.mapper;
 
 import org.apache.ibatis.annotations.*;
-import org.oj.entity.UserBean;
+import org.oj.entity.UserBase;
 
 import java.util.List;
 
@@ -10,10 +10,10 @@ public interface UserDataMapper {
 
     @Insert("INSERT INTO USERS (uuid, name, password, email, creatDate, status) VALUES (#{uuid}, #{name}, #{password}, #{email}, #{creatDate}, #{status})")
     @Options(useGeneratedKeys = true, keyProperty = "uuid")
-    String insertUser(UserBean userBean);
+    String insertUser(UserBase user);
 
     @Select("SELECT * FROM USERS WHERE email = #{email}, password = #{password}")
-    UserBean findUser(String email, String password);
+    UserBase findUser(String email, String password);
 
     @Delete("DELETE FROM USERS WHERE uuid = #{uuid}")
     int delUser(String uuid);
@@ -22,8 +22,8 @@ public interface UserDataMapper {
     int findEmail(String email);
 
     @Select("SELECT * FROM USERS LIMIT #{start},40 ORDER BY score DESC")
-    List<UserBean> findByPage(int start);
+    List<UserBase> findByPage(int start);
 
     @Select("SELECT * FROM USERS WHERE uuid = #{uuid}")
-    UserBean findUserById(String uuid);
+    UserBase findUserById(String uuid);
 }

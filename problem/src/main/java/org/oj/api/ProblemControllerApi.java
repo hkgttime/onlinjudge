@@ -4,5 +4,5 @@ import org.oj.entity.Restful;
 
 public interface ProblemControllerApi {
     Restful getProblem(String pid);
-    Restful getProblemList();
+    Restful getProblemList(int page);
 }
