@@ -5,14 +5,14 @@ CREATE TABLE USERS(
       name VARCHAR(10) NOT NULL,
       password VARCHAR(16) NOT NULL,
       email VARCHAR(16) NOT NULL,
-      phone VARCHAR(11),
+      avatar VARCHAR(100),
       motto VARCHAR(32),
       commitTotal INT,
       acceptedTotal INT,
       status INT(1),
       score LONG NOT NULL,
       creatDate DATE NOT NULL,
-      PRIMARY KEY(uuid)
+      PRIMARY KEY(uuid, name, email)
 );
 
 CREATE TABLE PROBLEMS(

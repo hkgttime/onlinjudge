@@ -7,9 +7,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Configuration
 public class UserInterceptorConf implements WebMvcConfigurer {
 
@@ -20,12 +17,12 @@ public class UserInterceptorConf implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        List excludePath = new ArrayList();
+/*        List<String> excludePath = new ArrayList();
         excludePath.add("login");
-        excludePath.add("create");
-        excludePath.add("profile/*");
-       registry.addInterceptor(jwtVerifyInt).addPathPatterns("/user/*")
-               .excludePathPatterns(excludePath);
+        excludePath.add("create/");
+        excludePath.add("profile/*");*/
+       registry.addInterceptor(jwtVerifyInt).addPathPatterns("/user/update");
+           //    .excludePathPatterns(excludePath);
        registry.addInterceptor(userDataVerification).addPathPatterns("/user/login")
                .addPathPatterns("/user/create");
     }

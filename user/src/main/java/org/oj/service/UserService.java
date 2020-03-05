@@ -30,7 +30,7 @@ public class UserService implements UserServiceApi {
     private Logger logger = LoggerFactory.getLogger(getClass());
     @Autowired
     private JwtUtils jwt;
-    @Value("spring.mail.username")
+    @Value("${spring.mail.username}")
     private String fromAddr;
 
 
@@ -42,7 +42,7 @@ public class UserService implements UserServiceApi {
         user.setUuid(UUID.randomUUID().toString().replaceAll("-",""));
         user.setCreatDate(new Date());
         user.setName((String) claims.get("name"));
-        user.setEmail((String) claims.get("email"));
+        user.setEmails((String) claims.get("email"));
         user.setPassword((String) claims.get("password"));
         user.setStatus(1);
         String uuid = userDataMapper.insertUser(user);
@@ -65,7 +65,7 @@ public class UserService implements UserServiceApi {
         if (user == null){
             return null;
         }
-        jwt.setTtl(7*24*60*6*1000);
+        jwt.setTtl(10*24*60*60*1000);
         Map<String, Object> map = new HashMap<>();
         map.put("uuid", user.getUuid());
         String token = jwt.createJWT("0001", "login", map);

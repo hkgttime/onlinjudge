@@ -1,0 +1,4 @@
+jwt:
+  conf:
+    key: 123
+    ttl: 3600

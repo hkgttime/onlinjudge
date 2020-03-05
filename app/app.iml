@@ -29,6 +29,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="user" />
     <orderEntry type="module" module-name="common" />
+    <orderEntry type="module" module-name="problem" />
     <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.0.7" level="project" />
     <orderEntry type="library" name="Maven: org.mybatis.spring.boot:mybatis-spring-boot-starter:1.1.1" level="project" />
     <orderEntry type="library" name="Maven: org.mybatis.spring.boot:mybatis-spring-boot-autoconfigure:1.1.1" level="project" />

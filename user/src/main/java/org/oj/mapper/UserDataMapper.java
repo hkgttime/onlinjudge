@@ -8,12 +8,12 @@ import java.util.List;
 @Mapper
 public interface UserDataMapper {
 
-    @Insert("INSERT INTO USERS (uuid, name, password, email, creatDate, status) VALUES (#{uuid}, #{name}, #{password}, #{email}, #{creatDate}, #{status})")
+    @Insert("INSERT INTO USERS (uuid, name, password, emails, creatDate, status) VALUES (#{uuid}, #{name}, #{password}, #{email}, NOW(), #{status})")
     @Options(useGeneratedKeys = true, keyProperty = "uuid")
     String insertUser(UserBase user);
 
-    @Select("SELECT * FROM USERS WHERE email = #{email}, password = #{password}")
-    UserBase findUser(String email, String password);
+    @Select("SELECT * FROM USERS WHERE emails=#{email} AND password=#{password}")
+    UserBase findUser(@Param("email") String email, @Param("password") String password);
 
     @Delete("DELETE FROM USERS WHERE uuid = #{uuid}")
     int delUser(String uuid);

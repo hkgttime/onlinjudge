@@ -28,10 +28,12 @@ public class UserBaseController implements UserControllerApi {
         Claims claims = (Claims) request.getAttribute("claims");
         int res = userServe.createUserServe(claims);
         if (res == 0){
-            result.setResultCode(ResultCode.Failed);
+            result.setResultCode(ResultCode.Failed.getCode());
+            result.setResultMsg(ResultCode.Failed.getMsg());
             return result;
         }
-        result.setResultCode(ResultCode.OK);
+        result.setResultCode(ResultCode.OK.getCode());
+        result.setResultMsg(ResultCode.OK.getMsg());
         return result;
     }
 
@@ -41,10 +43,12 @@ public class UserBaseController implements UserControllerApi {
         Claims claims = (Claims) request.getAttribute("claims");
         int res = userServe.delUserServe(claims);
         if (res == 0){
-            result.setResultCode(ResultCode.Failed);
+            result.setResultCode(ResultCode.Failed.getCode());
+            result.setResultMsg(ResultCode.Failed.getMsg());
             return result;
         }
-        result.setResultCode(ResultCode.OK);
+        result.setResultCode(ResultCode.OK.getMsg());
+        result.setResultMsg(ResultCode.OK.getMsg());
         return result;
     }
 
@@ -53,9 +57,9 @@ public class UserBaseController implements UserControllerApi {
     public Restful login(String email, String password) {
         Map<String, Object> profile = userServe.loginServe(email, password);
         if (profile == null){
-            return new Restful(ResultCode.C_20101, null);
+            return new Restful(ResultCode.user_not_exists.getCode(), ResultCode.user_not_exists.getMsg(), null);
         }
-        return new Restful(ResultCode.OK, profile);
+            return new Restful(ResultCode.OK.getCode(),ResultCode.OK.getMsg(), profile);
     }
 
 
@@ -69,7 +73,13 @@ public class UserBaseController implements UserControllerApi {
     @PostMapping("verificationcodes")
     public Restful sendVC(String email) throws MessagingException {
         int ret = userServe.sendVCtoEmail(email);
-        result.setReslutCode(ReslutCode.OK_0000);
+        if (ret == 0){
+             result.setResultCode(ResultCode.username_used.getCode());
+             result.setResultMsg(ResultCode.user_not_exists.getMsg());
+             return result;
+        }
+        result.setResultCode(ResultCode.OK.getCode());
+        result.setResultMsg(ResultCode.OK.getMsg());
         return result;
     }
 
@@ -79,7 +89,8 @@ public class UserBaseController implements UserControllerApi {
         UserBase user = userServe.getUser(uuid);
         Restful restful = new Restful();
         restful.setData(user);
-        restful.setReslutCode(ReslutCode.OK_0000);
+        restful.setResultCode(ResultCode.OK.getCode());
+        restful.setResultMsg(ResultCode.OK.getMsg());
         return restful;
     }
 }

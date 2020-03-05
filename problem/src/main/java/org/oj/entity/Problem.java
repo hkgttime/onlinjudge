@@ -7,6 +7,7 @@ public class Problem {
     private String description;
     private String inputFormat;
     private String outputFormat;
+    private IOExample example;
     private String hint;
     private int status;
     private String score;
@@ -15,12 +16,13 @@ public class Problem {
 
     public Problem(){};
 
-    public Problem(String pid, String title, String description, String inputFormat, String outputFormat, String hint, int status, String score, String provider) {
+    public Problem(String pid, String title, String description, String inputFormat, String outputFormat, IOExample example, String hint, int status, String score, String provider) {
         this.pid = pid;
         this.title = title;
         this.description = description;
         this.inputFormat = inputFormat;
         this.outputFormat = outputFormat;
+        this.example = example;
         this.hint = hint;
         this.status = status;
         this.score = score;
@@ -81,6 +83,14 @@ public class Problem {
 
     public void setOutputFormat(String outputFormat) {
         this.outputFormat = outputFormat;
+    }
+
+    public IOExample getExample() {
+        return example;
+    }
+
+    public void setExample(IOExample example) {
+        this.example = example;
     }
 
     public void setHint(String hint) {

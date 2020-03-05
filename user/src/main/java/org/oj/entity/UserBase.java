@@ -8,7 +8,7 @@ public class UserBase implements Serializable {
     private String uuid;
     private String name;
     private String password;
-    private String email;
+    private String emails;
     private String motto;
     private int commitTotal;
     private int acceptedTotal;
@@ -47,8 +47,8 @@ public class UserBase implements Serializable {
         return password;
     }
 
-    public String getEmail() {
-        return email;
+    public String getEmails() {
+        return emails;
     }
 
 
@@ -84,8 +84,8 @@ public class UserBase implements Serializable {
         this.password = password;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmails(String emails) {
+        this.emails = emails;
     }
 
 

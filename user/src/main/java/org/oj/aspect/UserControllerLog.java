@@ -14,11 +14,11 @@ public class UserControllerLog {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
-    @Pointcut("execution(public * org.oj.controller.UserBaseController.delUser(..))")
+    @Pointcut("execution(public * org.oj.controller.UserBaseController.login(..))")
     public void userLog(){}
 
     @Before("userLog()")
     public void logs(JoinPoint joinPoint){
-        logger.debug(joinPoint.getSignature().getName());
+        logger.info(joinPoint.getSignature().getName());
     }
 }

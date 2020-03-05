@@ -2,37 +2,41 @@ package org.oj.entity;
 
 public enum ResultCode {
 
-    OK("Request successful"),
-    Failed("Request failed"),
+    OK("00000","Request successful"),
+    Failed("11111","Request failed"),
 
-    C_20101("User does not exists"),
-    C_20102("Your ip's behave in a comic boisterous or unruly manner"),
-    C_20103("Token expired"),
-    C_20104("Token revoked"),
-    C_20105("Manage notice error, need auth"),
-    C_20106("The email has been used"),
-    C_20107("The username has been used"),
+    user_not_exists("20101", "User does not exists"),
+    token_expired("20103", "Token expired"),
+    token_revoked("20104", "Token revoked"),
+    need_auth("20105", "Manage notice error, need auth"),
+    email_used("20106", "The email has been used"),
+    username_used("20107", "The username has been used"),
 
-
-    C_20201("List does not exists"),
-
-
-    C_20301("send notice over the restrictions"),
-
-    S_10032("Commit success, while server slow now, please wait 1-2 minutes");
+    messaging_exception("10101", "Email send exception"),
+    runtime_exception("10032", "Runtime Exception");
 
 
+    String code;
     String msg;
 
-    ResultCode (String msg){
+    ResultCode(String code, String msg){
+        this.code = code;
         this.msg = msg;
+    }
+
+    public String getCode() {
+        return code;
     }
 
     public String getMsg() {
         return msg;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
+    @Override
+    public String toString() {
+        return "ResultCode{" +
+                "code:'" + code + '\'' +
+                ", msg:'" + msg + '\'' +
+                '}';
     }
 }

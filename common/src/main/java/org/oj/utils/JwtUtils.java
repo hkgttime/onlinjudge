@@ -1,17 +1,14 @@
 package org.oj.utils;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.JwtBuilder;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.Map;
 
-@ConfigurationProperties( prefix = "jwt.conf")
 @Component
+@ConfigurationProperties(prefix = "jwt.conf")
 public class JwtUtils {
 
     private  String key;
@@ -68,7 +65,7 @@ public class JwtUtils {
      * @return
      * @throws Exception
      */
-    public Claims parseJWT(String jwt) throws Exception {
+    public Claims parseJWT(String jwt) throws JwtException {
         return Jwts.parser()
                 .setSigningKey(key)
                 .parseClaimsJws(jwt)
