@@ -21,11 +21,10 @@ public class UserDataFormatCheckInt implements HandlerInterceptor {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         boolean tag = true;
-        if (!email.matches("[\\w\\.\\-]+@([\\w\\-]+\\.)+[\\w\\-]+")) {
+        if (email == null || !email.matches("[\\w\\.\\-]+@([\\w\\-]+\\.)+[\\w\\-]+")) {
             tag = false;
         }
-        if (!(password.length() > 6 && password.length() < 16)){
-
+        if (password == null || !(password.length() > 6 && password.length() < 16)){
             tag = false;
         }
         return tag;

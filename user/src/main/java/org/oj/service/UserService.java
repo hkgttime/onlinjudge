@@ -2,6 +2,7 @@ package org.oj.service;
 
 import io.jsonwebtoken.Claims;
 import org.oj.api.UserServiceApi;
+import org.oj.entity.HTMLTemplates;
 import org.oj.entity.UserBase;
 import org.oj.mapper.UserDataMapper;
 import org.oj.utils.JwtUtils;
@@ -35,20 +36,26 @@ public class UserService implements UserServiceApi {
 
 
 
-
     @Override
-    public int createUserServe(Claims claims) {
+    public int createUserServe(Map<String, String> map) {
+        String code = null;
+        long a = 0;
+        try {
+            code = (String) redisTemplate.opsForHash().get("verificationCodes", map.get("email"));
+            a =  redisTemplate.opsForHash().delete("verificationCodes", map.get("email"));
+        }catch (Exception ex){
+            logger.error("redisTemplate.opsForHash err: " + ex.toString());
+        }
+        if (code == null || !(code.equals(map.get("verificationCode")))) return 0;
         UserBase user = new UserBase();
         user.setUuid(UUID.randomUUID().toString().replaceAll("-",""));
-        user.setCreatDate(new Date());
-        user.setName((String) claims.get("name"));
-        user.setEmails((String) claims.get("email"));
-        user.setPassword((String) claims.get("password"));
+        user.setName((String) map.get("name"));
+        user.setEmails((String) map.get("email"));
+        user.setPassword((String) map.get("password"));
+        user.setScore(0);
         user.setStatus(1);
-        String uuid = userDataMapper.insertUser(user);
-        if (uuid == null) {
-            return 0;
-        }
+        int res = userDataMapper.insertUser(user);
+        if (res < 1) return 0;
         return 1;
     }
 
@@ -70,8 +77,8 @@ public class UserService implements UserServiceApi {
         map.put("uuid", user.getUuid());
         String token = jwt.createJWT("0001", "login", map);
         Map<String, Object> data = new HashMap<>();
-        data.put("avatar", user.getAvatar());
         data.put("token", token);
+        data.put("user", user);
         return data;
     }
 
@@ -88,14 +95,12 @@ public class UserService implements UserServiceApi {
         if (i > 0){
             return 0;
         }
-
         String code = getCode(5);
-
-
+        redisTemplate.opsForHash().put("verificationCodes", email, code);
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper messageHelper = new MimeMessageHelper(message,true);
         messageHelper.setSubject("[OnlineJudge] Please activation your account");
-        messageHelper.setText("<a>localhost:8080<a>", true);
+        messageHelper.setText(HTMLTemplates.mailVerificationTemps(code), true);
         messageHelper.setTo(email);
         messageHelper.setFrom(fromAddr);
         mailSender.send(message);

@@ -23,7 +23,7 @@ public class UserInterceptorConf implements WebMvcConfigurer {
         excludePath.add("profile/*");*/
        registry.addInterceptor(jwtVerifyInt).addPathPatterns("/user/update");
            //    .excludePathPatterns(excludePath);
-       registry.addInterceptor(userDataVerification).addPathPatterns("/user/login")
-               .addPathPatterns("/user/create");
+       //registry.addInterceptor(userDataVerification).addPathPatterns("/user/login")
+           //    .addPathPatterns("/user/create");
     }
 }

@@ -9,7 +9,7 @@ import java.util.Map;
 
 public interface UserServiceApi {
 
-    default int createUserServe(Claims claims) {
+    default int createUserServe(Map<String, String> map) {
         return 0;
     }
 

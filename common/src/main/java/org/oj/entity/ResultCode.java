@@ -10,6 +10,7 @@ public enum ResultCode {
     token_revoked("20104", "Token revoked"),
     need_auth("20105", "Manage notice error, need auth"),
     email_used("20106", "The email has been used"),
+    login_fail("20107", "Error Incorrect username or password"),
     username_used("20107", "The username has been used"),
 
     messaging_exception("10101", "Email send exception"),

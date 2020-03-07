@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public interface UserControllerApi {
 
-    default Restful activateAccount(HttpServletRequest request) {
+    default Restful register(String name, String email, String password, String verificationCode) {
         return null;
     }
 

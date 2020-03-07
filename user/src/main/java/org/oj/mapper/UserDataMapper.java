@@ -8,9 +8,8 @@ import java.util.List;
 @Mapper
 public interface UserDataMapper {
 
-    @Insert("INSERT INTO USERS (uuid, name, password, emails, creatDate, status) VALUES (#{uuid}, #{name}, #{password}, #{email}, NOW(), #{status})")
-    @Options(useGeneratedKeys = true, keyProperty = "uuid")
-    String insertUser(UserBase user);
+    @Insert("INSERT INTO USERS (uuid, name, password, emails, score, status, creatDate) VALUES (#{uuid}, #{name}, #{password}, #{emails}, #{score}, #{status}, NOW())")
+    int insertUser(UserBase user);
 
     @Select("SELECT * FROM USERS WHERE emails=#{email} AND password=#{password}")
     UserBase findUser(@Param("email") String email, @Param("password") String password);
@@ -18,8 +17,8 @@ public interface UserDataMapper {
     @Delete("DELETE FROM USERS WHERE uuid = #{uuid}")
     int delUser(String uuid);
 
-    @Select("SELECT COUNT(email) FROM USERS WHERE email = #{email}")
-    int findEmail(String email);
+    @Select("SELECT COUNT(emails) FROM USERS WHERE emails= #{email}")
+    int findEmail(@Param("email") String email);
 
     @Select("SELECT * FROM USERS LIMIT #{start},40 ORDER BY score DESC")
     List<UserBase> findByPage(int start);
