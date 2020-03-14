@@ -1,0 +1,17 @@
+2020-03-14 22:13:15.087  INFO 11712 --- [main] test                                     : Starting test on GL552VX with PID 11712 (started by httime in /home/httime/IdeaProjects/onlinejudge/execute)
+2020-03-14 22:13:15.089  INFO 11712 --- [main] test                                     : The following profiles are active: dev,common
+2020-03-14 22:13:15.988  INFO 11712 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-03-14 22:13:15.991  INFO 11712 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2020-03-14 22:13:16.023  INFO 11712 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 18ms. Found 0 repository interfaces.
+2020-03-14 22:13:16.389  INFO 11712 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration' of type [org.springframework.amqp.rabbit.annotation.RabbitBootstrapConfiguration$$EnhancerBySpringCGLIB$$639ff018] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-03-14 22:13:16.448  INFO 11712 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$9d3431ea] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-03-14 22:13:18.307  INFO 11712 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-03-14 22:13:18.910  INFO 11712 --- [main] test                                     : Started test in 4.453 seconds (JVM running for 5.371)
+2020-03-14 22:13:19.080  INFO 11712 --- [main] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [127.0.0.1:5672]
+2020-03-14 22:13:19.138  INFO 11712 --- [main] o.s.a.r.c.CachingConnectionFactory       : Created new connection: rabbitConnectionFactory#16872c4d:0/SimpleConnection@52ecc989 [delegate=amqp://guest@127.0.0.1:5672/, localPort= 34146]
+2020-03-14 22:13:19.187  INFO 11712 --- [main] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService
+2020-03-14 22:13:19.208  INFO 11712 --- [main] .l.DirectReplyToMessageListenerContainer : Container initialized for queues: [amq.rabbitmq.reply-to]
+2020-03-14 22:13:19.216  INFO 11712 --- [main] .l.DirectReplyToMessageListenerContainer : SimpleConsumer [queue=amq.rabbitmq.reply-to, consumerTag=amq.ctag-HBIOEGWqeTpnr0MBbtKm3Q identity=565d7d2f] started
+2020-03-14 22:13:24.247  INFO 11712 --- [Thread-2] .l.DirectReplyToMessageListenerContainer : Successfully waited for consumers to finish.
+2020-03-14 22:13:24.248  INFO 11712 --- [Thread-2] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService
+2020-03-14 22:13:24.251  INFO 11712 --- [Thread-2] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'

@@ -1,0 +1,7 @@
+#jwt
+jwt:
+  conf:
+    key: lpkokok
+    ttl: 360000
+server:
+  port: 8082
