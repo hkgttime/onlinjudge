@@ -20,7 +20,7 @@ public class Execute {
 
     @PostMapping("exec")
     public Restful execute(RunCode code){
-        ArrayList<String> illegals = template.detectorCodeByType(code.getType(),code.getData());
+        ArrayList<String> illegals = template.detectorCodeByType(code.getLanguage(),code.getData());
         Restful res = new Restful();
         if (illegals.size() < 0){
             return res;

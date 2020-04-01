@@ -12,12 +12,12 @@ public class RabbitmqConf {
 
     @Bean
     public Queue queue() {
-        return new Queue("exec_c", true);
+        return new Queue("exec_queue_c", true);
     }
 
     @Bean
     public DirectExchange directExchange() {
-        return new DirectExchange("exec_dir", true, false);
+        return new DirectExchange("exec_dir_c", true, false);
     }
 
     @Bean

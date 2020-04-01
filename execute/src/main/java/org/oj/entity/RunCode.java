@@ -2,10 +2,28 @@ package org.oj.entity;
 
 public class RunCode {
 
+    private String eid;
     private String pid;
     private String uid;
-    private String type;
+    private String language;
     private String data;
+    private int status;
+
+    public String getEid() {
+        return eid;
+    }
+
+    public void setEid(String eid) {
+        this.eid = eid;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
 
     public String getPid() {
         return pid;
@@ -15,8 +33,8 @@ public class RunCode {
         return uid;
     }
 
-    public String getType() {
-        return type;
+    public String getLanguage() {
+        return language;
     }
 
     public String getData() {
@@ -31,8 +49,8 @@ public class RunCode {
         this.uid = uid;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setLanguage(String language) {
+        this.language = language;
     }
 
     public void setData(String data) {
