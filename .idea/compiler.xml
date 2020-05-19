@@ -2,6 +2,7 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -19,7 +20,7 @@
       <module name="app" target="1.8" />
       <module name="common" target="1.8" />
       <module name="execute" target="1.8" />
-      <module name="onlinejudge" target="1.8" />
+      <module name="Overflow" target="1.8" />
       <module name="problem" target="1.8" />
       <module name="redis" target="1.8" />
       <module name="user" target="1.8" />
